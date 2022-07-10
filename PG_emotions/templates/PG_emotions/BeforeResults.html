@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Все участники дали свои оценки.
+{% endblock %}
+
+{% block content %}
+    <p>
+    Нажмите "Далее" чтобы перейти к принятию решений.
+
+    {% next_button %}
+{% endblock %}
+

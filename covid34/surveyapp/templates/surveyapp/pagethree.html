@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Page title
+{% endblock %}
+{% block content %}
+ 10.	Скажите пожалуйста, насколько Вы доверяете следующим организациям и институтам: <br>
+    {% formfields %}
+    {% next_button %}
+{% endblock %}
+
+
+

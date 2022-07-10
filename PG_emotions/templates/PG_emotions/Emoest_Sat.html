@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Принятие решений:  вы участник {{ player.id_in_group }}, идет раунд {{ player.round_number }} из {{ Constants.num_rounds }}.
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            В начале раунда у вас было {{ Constants.endowment }}.
+            <br> <br>
+            Вы внесли на общий счет {{ player.contribution }}.
+            <br> <br>
+            Всего ваша группа внесла на общий счет {{ group.total_contribution }}.
+            <br> <br>
+            Ваша доля от доходов с общего счета составила {{ group.individual_share }}.
+            <br> <br>
+            Ваш общий доход в текущем раунде равен {{ player.pgg_payoff }}.
+            <br> <br>
+            Ваш итоговый доход за текущий период (добавлено на ваш счет) {{ player.pgg_payoff }}.
+        </div>
+    </div>
+
+
+    </p>
+    <br>
+
+    <table class="table table-stripped">
+
+        <tr>
+            <td>Ваш (участника {{ player.id_in_group }}) накопленный доход за предыдущие раунды составляет</td>
+            <td> {{ player.my_payoff }}</td>
+        </tr>
+        <tr>
+            <td>Сумма ваших (участника {{ player.id_in_group }}) взносов на общий счет равна</td>
+            <td>{{ player.my_contribution }}</td>
+        </tr>
+    </table>
+
+
+    <h3>Как Вы думаете, каким было среднее <b>удовлетворение</b> участников группы от решения о взносе каждого из участников? Оцените среднее от 1 до 5,
+    где 1 - самая слабая эмоция, 5 - самая сильная</h3>
+
+    <br>
+
+    <table class="table table-stripped">
+        <thead>
+        <th></th>
+        <th> Накопленный доход</th>
+        <th> Сумма взносов</th>
+        <th> Среднее удовлетворение</th>
+        </thead>
+        <tbody>
+        {% for field, i in other_players_data %}
+            <tr>
+                <td> Участник {{ i.id_in_group }}</td>
+                <td> {{ i.pgg_payoff }}</td>
+                <td> {{ i.contribution }}</td>
+                <td> {% formfield field label='' %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% next_button %}
+{% endblock %}

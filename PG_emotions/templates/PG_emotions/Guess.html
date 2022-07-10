@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}  Принятие решений: Вы участник {{ player.id_in_group }}, идет раунд {{ current_round }} из {{ Constants.num_rounds }}  {% endblock %}
+
+{% block content %}
+    {% include 'PG_emotions/Instructions.html' %}
+
+    <p>
+        <!--    <b>Это игра на создание общественного блага.</b> -->
+
+        Все участники вашей группы только что приняли свои решения
+        <br><br>
+    </p>
+
+
+    {% formfield player.guess label="Как Вы думаете, сколько участники группы <b>в среднем вложили</b> в групповой проект в текущем раунде?" %}
+
+    {% next_button %}
+
+{% endblock %}
+

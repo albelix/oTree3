@@ -1,0 +1,12 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Page title
+{% endblock %}
+{% block content %}
+ 9.Скажите пожалуйста, насколько Вы доверяете следующим категориям людей: <br>
+    {% formfields %}
+    {% next_button %}
+{% endblock %}
+
+

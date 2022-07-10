@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Принятие решений: результаты для участника {{ player.id_in_group }}
+{% endblock %}
+
+{% block content %}
+
+
+    <p>
+        По итогам {{ Constants.num_rounds }} раундов принятия решений Вы заработали {{ total_pgg_payoff }}.
+
+        <br> <br>
+
+        Вы вложили в групповой проект {{ total_contribution }}
+
+        <br> <br>
+        Для расчета выигрыша за угадывание использовался раунд {{ guess_paying_round }}
+
+        <br> <br>
+
+        По итогам угадывания мнений других участников Вы заработали {{ guess_pay }}
+
+        <br> <br>
+
+        Ваш итоговый выигрыш составил {{ participant_payoff }}
+
+
+        <br> <br>
+
+        Пожалуйста, нажмите Далее для завершения эксперимента.
+    </p>
+
+    {% next_button %}
+{% endblock %}

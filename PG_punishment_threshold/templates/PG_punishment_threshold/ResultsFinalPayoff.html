@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Принятие решений II - результат для участника {{ player.id_in_group }}
+{% endblock %}
+
+{% block content %}
+
+{#        {% if global.outcome == 1 %}#}
+        Если бы Вам повезло, вы могли бы получить {{ total_payoff_full }}
+{#        {% else %}#}
+
+        <br> <br>
+
+        Если бы Вам <strong> не </strong> повезло, вы могли бы получить
+    {{ total_payoff_cut }}
+{#        {% endif %}#}
+
+        <br> <br>
+
+        В этой игре Вы получили {{ total_payoff}}
+
+        <br> <br>
+
+        Игра на этом завершена - спасибо за Ваше участие
+
+
+    </p>
+
+    {% next_button %}
+{% endblock %}
