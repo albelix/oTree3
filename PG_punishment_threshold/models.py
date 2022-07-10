@@ -38,6 +38,12 @@ class Subsession(BaseSubsession):
 #    total_payoff = models.FloatField()
 #    def creating_subsession(self):
 
+# admin variables
+#     def vars_for_admin_report(self):
+#         return dict(avg_contribution = sum([p.contribution for p in self.get_players()])/5)
+
+
+
 
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
@@ -76,7 +82,7 @@ class Group(BaseGroup):
            p.my_profit = sum([me.profit for me in p.in_all_rounds()]) #from FC
            # print('p.payoff_is', p.payoff)
 
-    # punishment
+# after punishment
     def g_set_pun(self):
         for p in self.get_players():
             p.p_punpay()
@@ -91,11 +97,6 @@ class Group(BaseGroup):
             p.my_pun = sum([me.pun for me in p.in_all_rounds()])
             p.my_puncost = sum([me.puncost for me in p.in_all_rounds()])
 
-# after punishment
-#     def set_punpay(self):
-#         for p in self.get_players():
-#             p.profit = p.payoff - p.pun - p.puncost
-#             print('p.payoff_is', p.profit)
 
 
 class Player(BasePlayer):

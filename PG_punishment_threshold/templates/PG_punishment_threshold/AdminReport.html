@@ -1,0 +1,27 @@
+<p>Here is the sorted list aaa payoffs in round {{ subsession.round_number }}</p>
+
+<table class="table">
+    <tr>
+        <th>Average contribution</th>
+        <td>{{ avg_contribution }}</td>
+    </tr>
+</table>
+
+
+<ul>
+    {% for payoff in contributions %}
+        <li>{{ payoff }}</li>
+    {% endfor %}
+</ul>
+
+<script>
+$(function() {
+    var chart;
+    $(document).ready(function() {
+      // console.log('hellow');
+    });
+});
+
+
+
+</script>
