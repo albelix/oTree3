@@ -124,8 +124,10 @@ class ResultsSummary(Page):
     def vars_for_template(self):
         return {
             'current_round': self.subsession.round_number,
-            'total_payoff_full': self.player.my_payoff,
-            'total_payoff_cut': self.player.my_payoff*Constants.loss_factor,
+            'total_payoff_full':  self.player.my_payoff,  # format(float(self.player.my_payoff), '.2f'),
+            # - displays 2 decimals, not rounded if USE POINT=True
+            'total_payoff_cut': self.player.my_payoff*Constants.loss_factor, #format(float(
+            # self.player.my_payoff*Constants.loss_factor), '.2f'),
             'player_in_all_rounds': self.player.in_all_rounds(),
             'total_contribution': self.player.my_contribution,
             'total_punishment': self.player.my_pun,
@@ -147,7 +149,7 @@ class ResultsFinalPayoff(Page):
         return {
             'total_payoff_full': self.player.my_payoff,  # sum([p.my_payoff for p in
             # self.player.in_all_rounds( )]),
-            'total_payoff_cut': self.player.my_payoff *Constants.loss_factor,
+            'total_payoff_cut': self.player.my_payoff * Constants.loss_factor,
             'total_payoff': self.participant.payoff # for p in self.group.get_players()
         }
 

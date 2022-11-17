@@ -30,17 +30,22 @@ class Constants(BaseConstants):
     num_decisions_per_round = 2
 
 
+
 class Subsession(BaseSubsession):
     thresh = models.IntegerField()
+    avg_contibution = models.FloatField()
     def creating_session(self):
         self.thresh = randint(1, 2400)
 #    flood = models.FloatField()
 #    total_payoff = models.FloatField()
 #    def creating_subsession(self):
 
+
 # admin variables
-#     def vars_for_admin_report(self):
-#         return dict(avg_contribution = sum([p.contribution for p in self.get_players()])/5)
+    def vars_for_admin_report(self):
+        payoffs = sorted([p.payoff for p in self.get_players()])
+        avg_contribution = sum([p.contribution for p in self.get_players() if p.contribution != None]) / 5
+        return dict(avg_contribution = avg_contribution, payoffs=payoffs)
 
 
 
@@ -114,7 +119,6 @@ class Player(BasePlayer):
     pun_4 = models.CurrencyField(min=0,max=4,initial=0, verbose_name="Вычет у участника 4")
     pun_5 = models.CurrencyField(min=0,max=4,initial=0, verbose_name="Вычет у участника 5")
     profit = models.CurrencyField()
-    pun = models.CurrencyField()
     mean_contribution = models.CurrencyField()
     puncost = models.CurrencyField()
     flood = models.FloatField()

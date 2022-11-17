@@ -5,7 +5,7 @@ SESSION_CONFIGS = [
        name='covidgame',
        display_name="covid",
        num_demo_participants=1,
-       app_sequence=['covid']
+       app_sequence=['covid', 'surveyapp']
     ),
 ]
 

@@ -25,37 +25,37 @@ SESSION_CONFIGS = [
     #     num_demo_participants=1,
     #     app_sequence=['survey', 'payment_info'],
     # ),
-    # {
-    #     'name': 'PG_standard',
-    #     'display_name': "Базовая игра",
-    #     'num_demo_participants': 5,
-    #     'app_sequence': ['PG_standard'],
-    #     'use_browser_bots': False
-    # },
+    {
+        'name': 'PG_standard',
+        'display_name': "Базовая игра",
+        'num_demo_participants': 5,
+        'app_sequence': ['PG_standard'],
+        'use_browser_bots': False
+    },
     # {
     #     'name': 'PG_try',
     #     'display_name': "Групповая игра (драфт)",
     #     'num_demo_participants': 5,
     #     'app_sequence': ['PG_try'],
     # },
-    # {
-    #     'name': 'PG_punishment',
-    #     'display_name': "Базовая игра с наказаниями",
-    #     'num_demo_participants': 5,
-    #     'app_sequence': ['PG_punishment'],
-    # },
-    # {
-    #     'name': 'PG_threshold',
-    #     'display_name': "Пороговая игра",
-    #     'num_demo_participants': 5,
-    #     'app_sequence': ['PG_threshold'],
-    #     'use_browser_bots': False,
-    # },
+    {
+        'name': 'PG_punishment',
+        'display_name': "Базовая игра с наказаниями",
+        'num_demo_participants': 5,
+        'app_sequence': ['PG_punishment'],
+    },
+    {
+        'name': 'PG_threshold',
+        'display_name': "Пороговая игра",
+        'num_demo_participants': 5,
+        'app_sequence': ['PG_threshold'],
+        'use_browser_bots': False,
+    },
     {
         'name': 'PG_punishment_threshold',
         'display_name': "Пороговая игра с наказаниями",
         'num_demo_participants': 5,
-        'app_sequence': ['PG_threshold','PG_punishment_threshold'],
+        'app_sequence': ['PG_punishment_threshold'], #'PG_threshold',
         'use_browser_bots': False,
     },
     {
