@@ -1,10 +1,10 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
-{% block title %}  Принятие решений: раунд {{ current_round }} из {{ Constants.num_rounds }}  {% endblock %}
+{% block title %}  Принятие решений II: раунд {{ current_round }} из {{ Constants.num_rounds }}  {% endblock %}
 
 {% block content %}
-    {% include 'PG_standard_6/Instructions.html' %}
+    {% include 'PG_punishment_6/Instructions.html' %}
 
  <p>
 <!--    <b>Это игра на создание общественного блага.</b> -->
@@ -15,12 +15,13 @@
 
      <br> <br>
 
-     Каждая единица на личном счету приносит 1 рубль лично данному участнику.
+     Каждая единица на личном счету приносит 1 очко лично данному участнику.
 
     <br>
 
     Каждая единица на общем счету приносит {{ Constants.efficiency_factor }}
-    рубля каждому участнику из данной группы, вне зависимости от его или ее взноса.
+    очка каждому участнику из данной группы, вне зависимости от его или ее
+     взноса.
 
      <br> <br>
 

@@ -2,8 +2,7 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Результаты для участника {{ player.id_in_group }} после раунда
-    {{ current_round }}
+    Принятие решений - результаты участника {{ player.id_in_group }} после раунда {{ current_round }}.
 {% endblock %}
 
 {% block content %}
@@ -17,26 +16,23 @@
 <br> <br>
     Всего ваша группа внесла на общий счет {{ group.total_contribution }}.
 <br> <br>
-    Вы добавили на свой личный счет {{ player.profit }}.
+    Ваша доля от доходов с общего счета составила {{ group.individual_share }}.
+<br> <br>
+    Ваш общий доход в текущем раунде равен {{ player.payoff }}.
 <br> <br>
     У вас было вычтено {{ player.pun }}.
 <br> <br>
     Вы потратили на вычеты {{ player.puncost }}.
 <br> <br>
-    Ваш итоговый доход за текущий период (добавлено на ваш счет)
-    {{ player.payoff }}.
-<br> <br>
-    Накопленная сумма на общем счету составила
-    {{ group.global_contribution }}
-    из {{ Constants.threshold }}, или примерно {{ group.current_share }}%.
+    Ваш итоговый доход за текущий период (добавлено на ваш счет) {{ player.profit }}.
+
 </p>
     <br>
 
-     <table class="table" style="width:500px; margin-top:20px;">
+     <table class="table-condensed" style="width:500px; margin-top:20px;">
 
-           <tr><td>Ваш накопленный доход
-               составляет </td><td> {{ player.my_payoff }}</td></tr>
-        <tr><td>Сумма ваших взносов на общий счет равна </td><td>{{ player.contribution}}</td></tr>
+           <tr><td>Ваш (участника {{ player.id_in_group }}) накопленный доход составляет </td><td> {{ player.my_profit }}</td></tr>
+        <tr><td>Сумма ваших (участника {{ player.id_in_group }}) взносов на общий счет равна </td><td>{{ player.contribution}}</td></tr>
     </table>
 
      <br>
@@ -45,17 +41,15 @@
 
     <br>
 
-    <table class="table" style="width:800px; margin-top:20px;">
+    <table class="table-condensed" style="width:500px; margin-top:20px;">
 
-         <tr><td>  </td><td> Накопленный доход  </td><td> Сумма взносов
-         </td><td>
-             Вычетено за раунд
-         </td></tr>
-        <tr><td> Участник 1 </td><td> {{ p1_payoff}} </td><td> {{ p1_contr}} </td><td> {{ pun1_round}} </td></tr>
-        <tr><td> Участник 2 </td><td> {{ p2_payoff}} </td><td> {{ p2_contr}}  </td><td> {{ pun2_round}} </td></tr>
-        <tr><td> Участник 3 </td><td> {{ p3_payoff}} </td><td> {{ p3_contr}}  </td><td> {{ pun3_round}} </td></tr>
-        <tr><td> Участник 4 </td><td> {{ p4_payoff}} </td><td> {{ p4_contr}} </td><td> {{ pun4_round}} </td></tr>
-        <tr><td> Участник 5 </td><td> {{ p5_payoff}} </td><td> {{ p5_contr}} </td><td> {{ pun5_round}} </td></tr>
+        <tr><td> </td><td> Накопленный доход </td><td> Сумма взносов </td></tr>
+        <tr><td> Участник 1 </td><td> {{ my_in_all_rounds_1}} </td><td> {{ p1_sumcontr}} </td></tr>
+        <tr><td> Участник 2 </td><td> {{ my_in_all_rounds_2}} </td><td> {{ p2_sumcontr}}  </td></tr>
+        <tr><td> Участник 3 </td><td> {{ my_in_all_rounds_3}} </td><td> {{ p3_sumcontr}} </td></tr>
+        <tr><td> Участник 4 </td><td> {{ my_in_all_rounds_4}} </td><td> {{ p4_sumcontr}} </td></tr>
+        <tr><td> Участник 5 </td><td> {{ my_in_all_rounds_5}} </td><td> {{ p5_sumcontr}} </td></tr>
+        <tr><td> Участник 6 </td><td> {{ my_in_all_rounds_6}} </td><td> {{ p6_sumcontr}} </td></tr>
 
         <td><td></td></tr>
 
