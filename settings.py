@@ -51,6 +51,7 @@ SESSION_CONFIGS = [
         'display_name': "Базовая игра с наказаниями",
         'num_demo_participants': 5,
         'app_sequence': ['PG_punishment'],
+        'use_browser_bots': False
     },
     {
         'name': 'PG_punishment_6',
