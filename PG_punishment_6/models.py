@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-# from tables import group
+
 
 from otree.constants import BaseConstants
 from otree.models import BaseSubsession, BaseGroup, BasePlayer
@@ -26,57 +26,74 @@ class Constants(BaseConstants):
     efficiency_factor = 2
     contribution_limits = currency_range(0, endowment, 1) #define range of contribs
     num_decisions_per_round = 2
-
+    cost_per_unit_pun = 0.2
 
 class Subsession(BaseSubsession):
     pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
     individual_share = models.CurrencyField()
     round_num=models.IntegerField()
-    payoff = models.CurrencyField()
-    profit = models.CurrencyField()
+    payoff = models.CurrencyField() #??
     puncost = models.CurrencyField()
-    punall = models.CurrencyField()
+    punall = models.CurrencyField() #??
+    profit = models.CurrencyField()
     my_profit = models.CurrencyField()
     punishment = models.CurrencyField(verbose_name="Вычет у участника")
+    my_payoff = models.CurrencyField()
+    my_contribution = models.CurrencyField()
+    my_pun = models.CurrencyField()
+    my_puncost = models.CurrencyField()
+    total_payoff = models.CurrencyField()
+
 
     # def round_number(self):
     #     return self.subsession.round_number
 
 # before punishment
-    def set_payoffs(self):
+    def g_set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * Constants.efficiency_factor / Constants.players_per_group
 #        self.my_contribution = [p.contribution for p in self.get_players()] #sum([p.contribution for p in self.in_all_rounds()])
 #        self.my_payoff = ([p.payoff for p in self.get_players()])
 #        self.mean_contribution=sum([p.contribution for p in self.get_players()])/5
         for p in self.get_players():
-           p.payoff = sum([ + Constants.endowment - p.contribution + self.individual_share,
-           - (p.pun or 0),
-           - (p.puncost or 0), ])
-           p.cumulative_payoff = sum([me.payoff for me in p.in_all_rounds()]) #from FC
-
-
-# punishment
-    def set_pun(self):
-        self.punishment = sum([p.pun for p in self.get_players()])
-        for p in self.get_players():
-           # p.profit = self.payoff - p.pun - p.puncost
-            p.profit = sum([ + p.payoff,
-                             - (p.punishment or 0),
-                             - (p.puncost or 0), ])
-            print('p.payoff_is', p.profit)
-
-        self.my_profit = sum([p.profit for p in self.get_players()])
+           p.profit = sum([ + Constants.endowment - p.contribution + self.individual_share])
+           # - (p.pun or 0),
+           # - (p.puncost or 0), ])
+           p.my_profit = sum([me.profit for me in p.in_all_rounds()]) #from FC
 
 # after punishment
-#     def set_punpay(self):
-#         for p in self.get_players():
-#             p.profit = p.payoff - p.pun - p.puncost
-#             print('p.payoff_is', p.profit)
+    def g_set_pun(self):
+        #self.punishment = sum([p.pun for p in self.get_players()])
+        for p in self.get_players():
+            p.payoff = sum([ + p.profit,
+                             - (p.pun or 0),
+                             - (p.puncost or 0), ])
+            print('p.payoff_is', p.payoff)
+
+        for p in self.get_players():
+            p.my_payoff = sum([me.payoff for me in p.in_all_rounds()]) # get_players()])
+            p.my_pun = sum([me.pun for me in p.in_all_rounds()])
+            p.my_puncost = sum([me.puncost for me in p.in_all_rounds()])
+
 
 class Player(BasePlayer):
     contribution = models.CurrencyField(doc="""The amount contributed by the player""", min=0, max=100, )
@@ -93,26 +110,26 @@ class Player(BasePlayer):
     pun_4 = models.CurrencyField(min=0,max=10,initial=0, verbose_name="Вычет у участника 4")
     pun_5 = models.CurrencyField(min=0,max=10,initial=0, verbose_name="Вычет у участника 5")
     pun_6 = models.CurrencyField(min=0, max=10, initial=0, verbose_name="Вычет у участника 6")
-    profit = models.CurrencyField()
+    profit = models.CurrencyField() #??
     mean_contribution = models.CurrencyField()
     puncost = models.CurrencyField()
     my_pun = models.CurrencyField()
     my_puncost = models.CurrencyField()
+    my_profit = models.CurrencyField()
+
 
     # before punishment
-    def my_method(self):
-        self.contribution = sum([p.contribution for p in self.in_all_rounds()])
-        self.my_payoff = sum([p.payoff for p in self.in_all_rounds()])
+    def p_mypayoff_method(self):
+        self.my_contribution = sum([p.contribution for p in self.in_all_rounds()])
+        self.my_profit = sum([p.profit for p in self.in_all_rounds()])
         # for p in self.group.get_players():
         #     self.my_contribution = p.contribution
         # for p in self.group.get_players():
         #     self.my_payoff =
-        self.mean_contribution=sum([self.contribution for p in self.group.get_players()])/5
-
+        self.mean_contribution=sum([self.contribution for p in self.group.get_players()])/Constants.players_per_group
 
 # after punishment
-#    def my_method_tim(self):
-    def set_punpay(self):
+    def p_punpay(self):
         if self.id_in_group == 1:
             self.pun=sum([p.pun_1 for p in self.group.get_players()]) # if p.id_in_group == 1])
             print('p.punishment_is', self.pun)
@@ -132,14 +149,14 @@ class Player(BasePlayer):
             self.pun=sum([p.pun_6 for p in self.group.get_players()]) # if p.id_in_group == 5])
             print('p.punishment_is', self.pun)
 
-        self.puncost = (self.pun_1 + self.pun_2 + self.pun_3 + self.pun_4 + self.pun_5 + self.pun_6)*0.2
-
         self.punishment = sum([self.pun for p in self.group.get_players()])
+        self.puncost = (self.pun_1 + self.pun_2 + self.pun_3 + self.pun_4 + self.pun_5 + self.pun_6)*Constants.cost_per_unit_pun
 
-        for p in self.group.get_players():
-            p.profit = self.payoff - self.pun - self.puncost
-            print('p.payoff_is', p.profit)
-
-        self.my_profit = sum([self.profit for p in self.in_all_rounds()])
-        self.my_pun = sum([self.pun for p in self.in_all_rounds()])
-        self.my_puncost = sum([self.puncost for p in self.in_all_rounds()])
+        # defined in groups
+        # for p in self.group.get_players():
+        #     p.payoff = self.profit - self.pun - self.puncost
+        #     print('p.payoff_is', p.profit)
+        #
+        # self.my_profit = sum([self.profit for p in self.in_all_rounds()])
+        # self.my_pun = sum([self.pun for p in self.in_all_rounds()])
+        # self.my_puncost = sum([self.puncost for p in self.in_all_rounds()])

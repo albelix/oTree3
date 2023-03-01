@@ -22,32 +22,17 @@ class Contribution(Page):
 class ResultsWaitPage(WaitPage):
     wait_for_all_players=True
     after_all_players_arrive = 'g_set_payoffs'
-    # def after_all_players_arrive(self):
-    #     self.group.set_payoffs()
-
-#    wait_for_all_groups=True
 
 class Results0(Page):
     wait_for_all_players=True
-    # after_all_players_arrive = 'my_method'
     def after_all_players_arrive(self):
         self.player.p_mypayoff_method()
-#        self.group.set_payoffs()  # group.set_payoffs() # my_method()
-        #     #            'my_payoff': sum([p.profit for p in self.in_all_rounds()]),
-        #      # 'pun_1': self.group.get_player_by_id(1).pun,
-        #     # 'pun_2': self.group.get_player_by_id(2).pun,
-        #     # 'pun_3': self.group.get_player_by_id(3).pun,
-        #     # 'pun_4': self.group.get_player_by_id(4).pun,
-        #     # 'pun_5': self.group.get_player_by_id(5).pun,
-        # }
 
 class PunPage(Page):
     wait_for_all_players = True
     form_model = models.Player
     def vars_for_template(self):
         self.player.p_mypayoff_method()
-#        self.group.set_payoffs()  # gro
-        # after_all_players_arrive = 'set_payoffs'
         return {
             'me_in_all_rounds_1': self.group.get_player_by_id(1).profit,
             'me_in_all_rounds_2': self.group.get_player_by_id(2).profit,
@@ -61,7 +46,7 @@ class PunPage(Page):
             'p5_contr': self.group.get_player_by_id(5).contribution,
             'current_round': self.subsession.round_number
         }
-#    form_fields = ['pun_{}'.format(i) for i in range(1, 6)]
+
 
     def get_form_fields(self):
         # pun_i is punishment by some player to player i
@@ -83,10 +68,9 @@ class ResultsWaitPage1(WaitPage):
     after_all_players_arrive = 'g_set_pun'
 #        self.p_punpay()
 
+
 class Results1(Page):
     wait_for_all_players = True
-#    after_all_players_arrive = set_punpay
-#    after_all_players_arrive = 'my_method'
     after_all_players_arrive = 'g_set_pun'
 
 class Results(Page):
@@ -120,6 +104,8 @@ class Results(Page):
 class ResultsSummary(Page):
     def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
+
+
 
     def vars_for_template(self):
         return {

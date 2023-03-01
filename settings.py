@@ -71,14 +71,14 @@ SESSION_CONFIGS = [
         'display_name': "Пороговая игра_6",
         'num_demo_participants': 6,
         'app_sequence': ['PG_threshold_6'],
-        'use_browser_bots': False,
+        'use_browser_bots': True,
     },
     {
         'name': 'PG_punishment_threshold',
         'display_name': "Пороговая игра с наказаниями",
         'num_demo_participants': 5,
         'app_sequence': ['PG_punishment_threshold'], #'PG_threshold_6',
-        'use_browser_bots': False,
+        'use_browser_bots': True,
     },
     {
         'name': 'PG_emotions',
