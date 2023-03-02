@@ -7,5 +7,6 @@ from .models import Constants
 class PlayerBot(Bot):
 
    def play_round(self):
-        yield (views.Contribution, {'contribution': c(42)})
-        yield (views.Results)
+        yield (pages.Contribution, {'contribution': c(42)})
+        yield (pages.Results0)
+        yield (pages.Results)

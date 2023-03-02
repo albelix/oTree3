@@ -26,11 +26,18 @@ SESSION_CONFIGS = [
     #     app_sequence=['survey', 'payment_info'],
     # ),
     {
+        'name': 'my_survey',
+        'display_name': "Опрос базовый Алматы",
+        'num_demo_participants': 5,
+        'app_sequence': ['my_survey'],
+        'use_browser_bots': False
+    },
+    {
         'name': 'PG_standard',
         'display_name': "Базовая игра",
         'num_demo_participants': 5,
         'app_sequence': ['PG_standard'],
-        'use_browser_bots': False
+        'use_browser_bots': True
     },
     {
         'name': 'PG_standard_6',
@@ -44,13 +51,13 @@ SESSION_CONFIGS = [
     #     'name': 'PG_try',
     #     'display_name': "Групповая игра (драфт)",
     #     'num_demo_participants': 5,
-    #     'app_sequence': ['PG_try'],
+    #     'app_sequence': ['PG_try'],Поскольку у игрока 1
     # },
     {
         'name': 'PG_punishment',
         'display_name': "Базовая игра с наказаниями",
         'num_demo_participants': 5,
-        'app_sequence': ['PG_punishment'],
+        'app_sequence': ['PG_standard', 'PG_punishment', 'my_survey'],
         'use_browser_bots': False
     },
     {
@@ -113,7 +120,7 @@ ROOMS = [
         participant_label_file='_rooms/econ101.txt',
     ),
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
-    dict(name='forCUSB', display_name='Room for 11-07 game', participant_label_file='PlayerList20.txt',),
+    dict(name='roomfor20', display_name='Room for 20', participant_label_file='PlayerList20.txt',),
 ]
 
 ADMIN_USERNAME = 'admin'

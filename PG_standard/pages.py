@@ -3,6 +3,9 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+class Welcome(Page):
+    def is_displayed(self):
+        return self.subsession.round_number == 1
 
 class Contribution(Page):
     form_model = models.Player
@@ -82,6 +85,7 @@ class ResultsSummary(Page):
 
 
 page_sequence = [
+    Welcome,
     Contribution,
     ResultsWaitPage,
     Results0,

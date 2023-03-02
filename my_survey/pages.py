@@ -6,13 +6,16 @@ from .models import Constants
 
 class MyPage(Page):
     form_model = models.Player
-    form_fields = ['age',
-                   'gender',
-                   'height',
+    form_fields = ['name',
+                   'first',
+                   'second',
                    'city',
+                   'yearsin',
                    'univ',
+                   'riskat',
                    'satis',
-                   'trust']
+                   'trust',
+                   'freedom']
 
 
 # class City(Page):

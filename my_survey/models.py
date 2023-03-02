@@ -44,18 +44,30 @@ class Player(BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
-    age = models.PositiveIntegerField(verbose_name='Ваш возраст (полных лет)',
-                                        min=13, max=95,
-                                        initial=None)
+    name= models.StringField(
+        verbose_name= '''Ваше имя и фамилия'''
+    )
 
-    gender = models.BooleanField(initial=None,
-                                choices=[[0,'Мужской'],[1,'Женский']],
-                                verbose_name='Ваш пол',
-                                widget=widgets.RadioSelect())
+    first= models.LongStringField(
+        verbose_name= '''Опишите вкратце Вашу стратегию в первой части игры'''
+    )
 
-    height = models.PositiveIntegerField(verbose_name='Ваш рост (в сантиметрах)',
-                                        min=100, max=240,
-                                        initial=None)
+    second= models.LongStringField(
+        verbose_name= '''Как изменилась Ваша стратегия во второй части игры, и почему'''
+    )
+
+    # age = models.PositiveIntegerField(verbose_name='Ваш возраст (полных лет)',
+    #                                     min=13, max=95,
+    #                                     initial=None)
+    #
+    # gender = models.BooleanField(initial=None,
+    #                             choices=[[0,'Мужской'],[1,'Женский']],
+    #                             verbose_name='Ваш пол',
+    #                             widget=widgets.RadioSelect())
+    #
+    # height = models.PositiveIntegerField(verbose_name='Ваш рост (в сантиметрах)',
+    #                                     min=100, max=240,
+    #                                     initial=None)
 
     city = models.PositiveIntegerField(
         verbose_name='''
@@ -63,11 +75,12 @@ class Player(BasePlayer):
         min = 1, max=30000000,
         initial = None)
 
-    # yearsinmsc = models.PositiveIntegerField(
-    #     verbose_name='''
-    # Укажите, сколько лет Вы живете в Москве. Впишите число, округленное до ближайшего целого числа лет.''',
-    # min = 0, max=95,
-    #           initial = None)
+    yearsin = models.PositiveIntegerField(
+        verbose_name='''
+    Укажите, сколько лет Вы живете в Алматы. Впишите число, округленное до ближайшего целого числа 
+    лет.''',
+    min = 0, max=95,
+              initial = None)
 
     # mscyourcity = models.PositiveIntegerField(
     #     verbose_name='''
@@ -93,24 +106,24 @@ class Player(BasePlayer):
     # )
 
     univ= models.CharField(
-        verbose_name= '''Укажите ВУЗ, в котором Вы получили Ваше наивысшее образование.'''
+        verbose_name= '''Укажите Ваш средний балл за время учебы.'''
     )
 
     # study= models.CharField(
     #     verbose_name= '''Укажите  направление подготовки, на котором Вы обучались в этом ВУЗе.'''
     # )
     #
-    # riskat=models.PositiveIntegerField(
-    #     verbose_name='''Вы любите риск или боитесь риска?''',
-    #            choices = [
-    #                          [1, 'Очень люблю рисковать'],
-    #                          [2, 'Скорее люблю рисковать'],
-    #                          [3, 'Нейтрален к риску'],
-    #                          [4, 'Скорее боюсь рисковать'],
-    #                          [5, 'Очень боюсь рисковать'],
-    #                      ],
-    #                      widget = widgets.RadioSelect()
-    # )
+    riskat=models.PositiveIntegerField(
+        verbose_name='''Вы любите риск или боитесь риска?''',
+               choices = [
+                             [1, 'Очень люблю рисковать'],
+                             [2, 'Скорее люблю рисковать'],
+                             [3, 'Нейтрален к риску'],
+                             [4, 'Скорее боюсь рисковать'],
+                             [5, 'Очень боюсь рисковать'],
+                         ],
+                         widget = widgets.RadioSelect()
+    )
     #
     # riskHL1=models.BooleanField(
     #     verbose_name='''Выберите одну из двух лотерей
@@ -216,12 +229,6 @@ class Player(BasePlayer):
     #     widget=widgets.RadioSelect()
     # )
 
-    satis=models.PositiveIntegerField(
-        verbose_name='''Учитывая все обстоятельства, насколько Вы удовлетворены вашей жизнью в целом в эти дни? (от 1 «полностью не удовлетворен» до 10 «полностью удовлетворен»)''',
-          choices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    widget = widgets.RadioSelectHorizontal()
-    )
-
     trust = models.PositiveIntegerField(
         verbose_name ='''Как Вы считаете, в целом большинству людей можно доверять, или же при общении с другими людьми 
         осторожность никогда не повредит? Пожалуйста, отметьте позицию на шкале, где 1 означает "Нужно быть очень осторожным с другими людьми" и 10
@@ -230,15 +237,21 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal()
     )
 
-    # freedom = models.PositiveIntegerField(
-    #     verbose_name='''Некоторые люди чувствуют, что они обладают полной свободой выбора и контролируют свою жизнь, в
-    # то время как другие люди чувствуют, что то, что они делают, не имеет реального влияния на происходящее с ними. До какой степени эти
-    # характеристики применимы к Вам и Вашей жизни? Пожалуйста, отметьте позицию на шкале, где 1 означает "у меня нет свободы выбора" и 10
-    # означает "у меня полная свобода выбора".
-    # ''',
-    #     choices=[1,2,3,4,5,6,7,8,9,10],
-    #     widget=widgets.RadioSelectHorizontal()
-    # )
+    satis=models.PositiveIntegerField(
+        verbose_name='''Учитывая все обстоятельства, насколько Вы удовлетворены вашей жизнью в целом в эти дни? (от 1 «полностью не удовлетворен» до 10 «полностью удовлетворен»)''',
+          choices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    widget = widgets.RadioSelectHorizontal()
+    )
+
+    freedom = models.PositiveIntegerField(
+        verbose_name='''Некоторые люди чувствуют, что они обладают полной свободой выбора и контролируют свою жизнь, в
+    то время как другие люди чувствуют, что то, что они делают, не имеет реального влияния на происходящее с ними. До какой степени эти
+    характеристики применимы к Вам и Вашей жизни? Пожалуйста, отметьте позицию на шкале, где 1 означает "у меня нет свободы выбора" и 10
+    означает "у меня полная свобода выбора".
+    ''',
+        choices=[1,2,3,4,5,6,7,8,9,10],
+        widget=widgets.RadioSelectHorizontal()
+    )
     #
     #
     # politics=models.PositiveIntegerField(
